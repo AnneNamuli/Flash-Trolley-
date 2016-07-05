@@ -1,0 +1,32 @@
+{% extends 'flashTrolley/base.html' %}
+
+{% block title %} Login | Flash-Trolley {% endblock %}
+{% block signup %}
+<div class="about">
+  <div class="container">
+      <div class="register">
+          <form method="POST" action="">
+                {% csrf_token %}
+                {% for field in register_form %}
+                    {% if field.errors %}
+                        <ol class="errorlist">
+                            {% for error in field.errors %}
+                                <li><strong>*{{ error|escape }}</strong></li>
+                            {% endfor %}
+                        </ol>
+                    {% endif %}
+                    {{ field.label_tag }}
+                    {{ field }}<br><br>
+                {% endfor %}
+                <button type='submit'> Submit </button>
+            </form>
+            <div class="clearfix"> </div>
+
+		   </div>
+	</div>
+</div>
+
+
+
+
+{% endblock %}

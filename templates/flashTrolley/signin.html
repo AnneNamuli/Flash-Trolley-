@@ -1,0 +1,46 @@
+{% extends 'flashTrolley/base.html' %}
+
+{% block title %} Login | Flash-Trolley {% endblock %}
+{% block login %}
+  <div class="container">
+         <div class="register">
+			   <div class="col-md-6 login-left">
+			  	 <h3>NEW CUSTOMERS</h3>
+				 <p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
+				 <a class="acount-btn" href='/register/'>Create an Account</a>
+			   </div>
+			   <div class="col-md-6 login-right">
+			  	<h3>REGISTERED CUSTOMERS</h3>
+				<p>If you have an account with us, please log in.</p>
+
+        <form method="POST" action="">
+            {% csrf_token %}
+            {% for field in form %}
+                {% if field.errors %}
+                    <ol class="errorlist">
+                        {% for error in field.errors %}
+                            <li><strong>*{{ error|escape }}</strong></li>
+                        {% endfor %}
+                    </ol>
+                {% endif %}
+                <table border="0">
+                    <tr>
+                        <th style="color: #cc7832">{{ field.label_tag }}</th>
+                        <td> {{ field }}</td>
+                    </tr>
+                </table>
+                <br/>
+                {% endfor %}
+            <button type='submit' class="acount-btn"> Login </button>
+        </form>
+
+       <p> Or login with.... </p>
+        <a href="{% url 'flashTrolley:social:begin' 'facebook' %}?next={{ request.path }}">Facebook</a>
+        <a href="{% url 'flashTrolley:social:begin' 'twitter' %}?next={{ request.path }}">Twitter</a>
+
+			   </div>
+			   <div class="clearfix"> </div>
+		</div>
+	</div>
+</div>
+{% endblock %}
